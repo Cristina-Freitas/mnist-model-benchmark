@@ -59,7 +59,6 @@ def plotar_matriz_confusao(matriz, titulo):
             )
 
     plt.tight_layout()
-    plt.show()
 
 
 def plotar_matriz_ood(matriz, classes_reais, classes_previstas, titulo):
@@ -99,4 +98,3 @@ def plotar_matriz_ood(matriz, classes_reais, classes_previstas, titulo):
             )
 
     plt.tight_layout()
-    plt.show()
