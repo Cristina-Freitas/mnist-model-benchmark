@@ -1,0 +1,6 @@
+Amostra,Valor real,Previsão,Confiança,Acertou
+Caligrafia digital,4,4,0.67586106,Sim
+Desenho no Paint,4,4,0.9928307,Sim
+Manuscrito fotografado,4,5,0.37952214,Não
+Manuscrito digitalizado,4,4,0.96018165,Sim
+Outra caligrafia,4,4,0.40109855,Sim
