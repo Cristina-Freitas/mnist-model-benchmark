@@ -43,3 +43,22 @@ def identificar_maior_confusao(matriz):
     taxa_confusao = matriz_erros[classe_real, classe_prevista]
 
     return classe_real, classe_prevista, taxa_confusao
+
+
+def calcular_matriz_ood(y_real, y_pred, classes_reais, classes_previstas):
+    """Constrói uma matriz para analisar classes reais ocultadas contra classes conhecidas previstas."""
+
+    matriz = np.zeros(
+        (len(classes_reais), len(classes_previstas)),
+        dtype=int
+    )
+
+    for i, classe_real in enumerate(classes_reais):
+        for j, classe_prevista in enumerate(classes_previstas):
+            matriz[i, j] = np.sum(
+                (y_real == classe_real) & (y_pred == classe_prevista)
+            )
+
+    return matriz
+
+

@@ -1,3 +1,4 @@
+import numpy as np
 from sklearn.model_selection import train_test_split  # Importa a função usada para dividir os dados de forma estratificada
 
 
@@ -36,3 +37,13 @@ def achatar_imagens(X):
     X_achatado = X.reshape(X.shape[0], -1)  # Mantém a quantidade de imagens e transforma cada matriz 28 x 28 em um vetor de 784 pixels
 
     return X_achatado  # Retorna os dados no formato esperado pelos modelos clássicos
+
+def ocultar_classes(X, y, classes_ocultas):
+    """Remove do conjunto as amostras pertencentes às classes informadas."""
+
+    mascara = ~np.isin(y, classes_ocultas)  # Mantém apenas exemplos que não pertencem às classes ocultadas
+
+    X_filtrado = X[mascara]
+    y_filtrado = y[mascara]
+
+    return X_filtrado, y_filtrado

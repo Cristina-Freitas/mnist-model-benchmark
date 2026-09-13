@@ -1,6 +1,6 @@
 import numpy as np  # Importa o NumPy para criar dados simulados para o teste
 
-from src.preprocessing import dividir_dados, normalizar_pixels, achatar_imagens  # Importa a função de divisão que será testada
+from src.preprocessing import dividir_dados, normalizar_pixels, achatar_imagens, ocultar_classes  # Importa a função de divisão que será testada
 
 
 def test_proporcoes_divisao():
@@ -68,3 +68,21 @@ def test_achatar_imagens():
 
     assert X_achatado.shape == (2, 784)  # Verifica se cada imagem passou a possuir 784 atributos
     assert np.array_equal(X_achatado[0], X[0].reshape(-1))  # Confirma que os valores e sua ordem foram preservados
+
+
+def test_ocultar_classes():
+    """Verifica se as classes selecionadas são completamente removidas."""
+
+    X = np.arange(10).reshape(5, 2)
+    y = np.array([0, 4, 2, 7, 9])
+
+    X_filtrado, y_filtrado = ocultar_classes(
+        X,
+        y,
+        classes_ocultas=[4, 7]
+    )
+
+    assert 4 not in y_filtrado
+    assert 7 not in y_filtrado
+    assert len(X_filtrado) == 3
+    assert len(y_filtrado) == 3

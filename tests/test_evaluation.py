@@ -2,7 +2,8 @@ import numpy as np
 from src.evaluation import (
     calcular_metricas,
     calcular_matriz_confusao,
-    identificar_maior_confusao
+    identificar_maior_confusao,
+    calcular_matriz_ood
 )
 
 from src.evaluation import calcular_metricas, calcular_matriz_confusao
@@ -53,3 +54,28 @@ def test_identificar_maior_confusao():
     assert classe_real == 2
     assert classe_prevista == 1
     assert np.isclose(taxa, 0.30)
+
+
+def test_calcular_matriz_ood():
+    """Verifica a distribuição das classes ocultadas entre as classes previstas."""
+
+    y_real = np.array([4, 4, 4, 7, 7, 7])
+    y_pred = np.array([9, 9, 2, 3, 9, 3])
+
+    matriz = calcular_matriz_ood(
+        y_real,
+        y_pred,
+        classes_reais=[4, 7],
+        classes_previstas=[2, 3, 9]
+    )
+
+    assert matriz.shape == (2, 3)
+    assert matriz.sum() == 6
+
+    assert np.array_equal(
+        matriz,
+        np.array([
+            [1, 0, 2],  # Dígito 4: uma previsão como 2 e duas como 9
+            [0, 2, 1]   # Dígito 7: duas previsões como 3 e uma como 9
+        ])
+    )
