@@ -28,3 +28,11 @@ def normalizar_pixels(X):
     X_normalizado = X.astype("float32") / 255.0  # Converte para ponto flutuante e redimensiona os pixels para o intervalo [0, 1]
 
     return X_normalizado  # Retorna as imagens normalizadas
+
+
+def achatar_imagens(X):
+    """Transforma imagens 28 x 28 em vetores de 784 atributos."""
+
+    X_achatado = X.reshape(X.shape[0], -1)  # Mantém a quantidade de imagens e transforma cada matriz 28 x 28 em um vetor de 784 pixels
+
+    return X_achatado  # Retorna os dados no formato esperado pelos modelos clássicos

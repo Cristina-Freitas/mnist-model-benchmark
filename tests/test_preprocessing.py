@@ -1,6 +1,6 @@
 import numpy as np  # Importa o NumPy para criar dados simulados para o teste
 
-from src.preprocessing import dividir_dados, normalizar_pixels  # Importa a função de divisão que será testada
+from src.preprocessing import dividir_dados, normalizar_pixels, achatar_imagens  # Importa a função de divisão que será testada
 
 
 def test_proporcoes_divisao():
@@ -57,3 +57,14 @@ def test_normalizacao_preserva_formato():
 
     assert X_normalizado.shape == X.shape  # Confirma que a normalização não alterou as dimensões das imagens
     assert X_normalizado.dtype == np.float32  # Confirma a conversão dos pixels para float32
+
+
+def test_achatar_imagens():
+    """Verifica se imagens 28 x 28 são transformadas corretamente em vetores de 784 atributos."""
+
+    X = np.arange(2 * 28 * 28).reshape(2, 28, 28)  # Cria duas imagens artificiais de 28 x 28 pixels
+
+    X_achatado = achatar_imagens(X)  # Aplica a transformação para o formato vetorial
+
+    assert X_achatado.shape == (2, 784)  # Verifica se cada imagem passou a possuir 784 atributos
+    assert np.array_equal(X_achatado[0], X[0].reshape(-1))  # Confirma que os valores e sua ordem foram preservados
