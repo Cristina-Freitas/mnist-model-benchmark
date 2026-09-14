@@ -377,7 +377,7 @@ O modelo classificou corretamente **4 das 5 imagens**.
 
 Como o conjunto possui apenas cinco exemplos, esse resultado é interpretado como um **experimento qualitativo de generalização**, e não como uma nova estimativa formal de Accuracy.
 
-![Imagens externas processadas](./outputs/figures/imagens_processadas_fase5.png)
+![Imagens externas processadas](./outputs/figures/imagens_preprocessadas_fase5.png)
 
 ---
 
